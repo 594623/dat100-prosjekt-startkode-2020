@@ -12,7 +12,10 @@ public class GPSData {
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.construtor("GPSData"));
+		gpspoints = new GPSPoint[n];
+		antall = 0;
+		
+		//throw new UnsupportedOperationException(TODO.construtor("GPSData"));
 
 		// TODO - SLUTT
 	}
@@ -27,7 +30,15 @@ public class GPSData {
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		if (antall <= gpspoints.length - 1) {
+			gpspoints[antall] = gpspoint;
+			antall++;
+			inserted = true;
+		} else inserted = false;
+		
+		return inserted;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 	}
