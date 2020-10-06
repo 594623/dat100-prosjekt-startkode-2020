@@ -27,13 +27,17 @@ public class GPSPoint {
 	// TODO - get/set metoder
 	public int getTime() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return time;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 
 	public void setTime(int time) {
-				
-		throw new UnsupportedOperationException(TODO.method());
+			
+		
+		
+		//throw new UnsupportedOperationException(TODO.method());
 
 	}
 
