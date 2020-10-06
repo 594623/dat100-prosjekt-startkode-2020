@@ -35,7 +35,7 @@ public class GPSPoint {
 
 	public void setTime(int time) {
 			
-		
+		this.time = time;
 		
 		//throw new UnsupportedOperationException(TODO.method());
 
@@ -43,37 +43,49 @@ public class GPSPoint {
 
 	public double getLatitude() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return latitude;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 
 	public void setLatitude(double latitude) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		this.latitude = latitude;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 
 	public double getLongitude() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return longitude;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 
 	public void setLongitude(double longitude) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		this.longitude = longitude;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 
 	public double getElevation() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return elevation;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 
 	public void setElevation(double elevation) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		this.elevation = elevation;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 	}
 	
@@ -82,8 +94,12 @@ public class GPSPoint {
 		String str;
 		
 		// TODO - start
+		
+		str = time + " (" + latitude + "," + longitude + ") " + elevation + "\n";
+		
+		return str;
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - slutt
 		
