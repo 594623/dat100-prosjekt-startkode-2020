@@ -141,9 +141,7 @@ public class GPSComputer {
 		double kcal;
 
 		// MET: Metabolic equivalent of task angir (kcal x kg-1 x h-1)
-		// met = kcal x kg x h
-		// kcal = kg x h / met
-		double met = 0;		
+		double met = 0;
 		double speedmph = speed * MS;
 		
 		// TODO - START
@@ -162,7 +160,7 @@ public class GPSComputer {
 			met = 16;
 		}
 		
-		return weight * speed / met;
+		return met * weight * (secs / 3600.0);
 		
 		//throw new UnsupportedOperationException(TODO.method());
 
@@ -172,11 +170,13 @@ public class GPSComputer {
 
 	public double totalKcal(double weight) {
 
-		double totalkcal = 0;
+		//double totalkcal = 0;
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return kcal(weight, totalTime(), averageSpeed());
+				
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 		
@@ -189,8 +189,17 @@ public class GPSComputer {
 		System.out.println("==============================================");
 
 		// TODO - START
+		
+		System.out.println("Total Time     : " + GPSUtils.formatTime(totalTime()));
+		System.out.println("Total distance : " + Math.round(totalDistance() / 10.0) / 100.0 + " km");
+		System.out.println("Total elevation: " + Math.round(totalElevation() * 100) / 100.0 + " m");
+		System.out.println("Max speed      : " + Math.round(maxSpeed() * 100) / 100.0 + " km/t");
+		System.out.println("Average speed  : " + Math.round(averageSpeed() * 100) / 100.0 + " km/t");
+		System.out.println("Energy         : " + Math.round(totalKcal(WEIGHT) * 100) / 100.0 + " kcal");
+		
+		System.out.println("==============================================");
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
