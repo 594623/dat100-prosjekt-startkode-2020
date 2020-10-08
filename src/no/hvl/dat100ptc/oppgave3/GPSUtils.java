@@ -37,7 +37,7 @@ public class GPSUtils {
 		return min;
 		
 		// TODO - START
-
+		
 		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUT
