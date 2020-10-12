@@ -1,5 +1,9 @@
 package no.hvl.dat100ptc.oppgave5;
 
+import static javax.swing.JOptionPane.showInputDialog;
+
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import easygraphics.EasyGraphics;
@@ -36,7 +40,20 @@ public class ShowRoute extends EasyGraphics {
 
 		showRouteMap(MARGIN + MAPYSIZE);
 		
-		showStatistics();
+		double input = 0;
+		boolean success = false;
+		do {
+			try {
+				Scanner scan = new Scanner(showInputDialog("Enter your weight: "));
+				input = (double) Math.round(scan.nextDouble() * 10) / 10;
+				success = true;
+			} catch (Exception e) {
+				success = false;
+			}
+		} while (success == false);
+		
+		
+		showStatistics(input);
 	}
 
 	// antall x-pixels per lengdegrad
@@ -45,7 +62,7 @@ public class ShowRoute extends EasyGraphics {
 		double maxlon = GPSUtils.findMax(GPSUtils.getLongitudes(gpspoints));
 		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
 
-		double xstep = MAPXSIZE / (Math.abs(maxlon - minlon)); 
+		double xstep = MAPXSIZE / (Math.abs(maxlon - minlon));
 
 		return xstep;
 	}
@@ -57,8 +74,17 @@ public class ShowRoute extends EasyGraphics {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
-
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+		
+		ystep = MAPYSIZE / (Math.abs(maxlat - minlat));
+		
+		//Map size / difference of maxlon & minlon
+		
+		return ystep;
+		
+		//throw new UnsupportedOperationException(TODO.method());
+		
 		// TODO - SLUTT
 		
 	}
@@ -66,13 +92,40 @@ public class ShowRoute extends EasyGraphics {
 	public void showRouteMap(int ybase) {
 
 		// TODO - START
+		double xstep = xstep();
+		double ystep = ystep();
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+		double minlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		
+		setColor(76,187,23);
+		
+		int prevx = 0, prevy = 0;
+		
+		for (int i = 0; i < gpspoints.length; i++) {
+			double xMinDiff = gpspoints[i].getLongitude() - minlon;
+			double yMinDiff = gpspoints[i].getLatitude() - minlat;
+			
+			int xCoord = (int) (xMinDiff * xstep) + MARGIN;
+			int yCoord = (int)(-yMinDiff * ystep) + MARGIN;
+			
+			fillCircle(xCoord, yCoord, 3);
+			
+			if (i > 0) {
+				drawLine(prevx, prevy, xCoord, yCoord);
+			}
+			
+			prevx = xCoord;
+			prevy = yCoord;
+			
+		}
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 	}
 
-	public void showStatistics() {
+	public void showStatistics(double weight) {
 
 		int TEXTDISTANCE = 20;
 
@@ -80,8 +133,21 @@ public class ShowRoute extends EasyGraphics {
 		setFont("Courier",12);
 		
 		// TODO - START
+				
+		String[] strings = {
+				"Total Time     : " + GPSUtils.formatTime(gpscomputer.totalTime()),
+				"Total distance : " + Math.round(gpscomputer.totalDistance() / 10.0) / 100.0 + " km",
+				"Total elevation: " + Math.round(gpscomputer.totalElevation() * 100) / 100.0 + " m",
+				"Max speed      : " + Math.round(gpscomputer.maxSpeed() * 100) / 100.0 + " km/t",
+				"Average speed  : " + Math.round(gpscomputer.averageSpeed() * 100) / 100.0 + " km/t",
+				"Energy         : " + Math.round(gpscomputer.totalKcal(weight) * 100) / 100.0 + " kcal"
+		};
 		
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < strings.length; i++) {
+			drawString(strings[i], MARGIN, MARGIN + TEXTDISTANCE * i);
+		}
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT;
 	}
